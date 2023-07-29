@@ -93,8 +93,7 @@ class AuthenticationController extends Controller
 
     public function logoutUser(Request $request)
     {
-        $user = auth()->user();
-        $user->tokens()->delete();
+        auth()->user()->tokens()->delete();
 
         return response()->json([
             'status' => true,
