@@ -93,7 +93,8 @@ class AuthenticationController extends Controller
 
     public function logoutUser()
     {
-        $this->guard->logout();
+        $user = auth()->user();
+        $user->logout();
 
         $request->session()->invalidate();
 
