@@ -91,7 +91,7 @@ class AuthenticationController extends Controller
         }
     }
 
-    public function logoutUser()
+    public function logoutUser(Request $request)
     {
         $user = auth()->user();
         $user->logout();
