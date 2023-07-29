@@ -79,6 +79,7 @@ class AuthenticationController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
+                'user' => $user,
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 
@@ -88,5 +89,19 @@ class AuthenticationController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+    }
+
+    public function logoutUser()
+    {
+        $this->guard->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'User logout Successfully',
+        ], 200);
     }
 }
