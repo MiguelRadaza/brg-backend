@@ -94,11 +94,7 @@ class AuthenticationController extends Controller
     public function logoutUser(Request $request)
     {
         $user = auth()->user();
-        $user->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
+        $user->tokens()->delete();
 
         return response()->json([
             'status' => true,
