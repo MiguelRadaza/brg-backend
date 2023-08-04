@@ -19,7 +19,7 @@ class AuthenticationController extends Controller
             $validateUser = Validator::make($request->all(), 
             [
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email|unique:users.email',
                 'password' => 'required'
             ]);
 
@@ -39,6 +39,7 @@ class AuthenticationController extends Controller
 
             return response()->json([
                 'status' => true,
+                'user' => $user,
                 'message' => 'User Created Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
