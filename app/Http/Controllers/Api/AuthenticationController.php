@@ -29,6 +29,11 @@ class AuthenticationController extends Controller
                 ], 401);
             }
 
+            $user = User::where('email', $request->email)->first();
+            if (!$user) {
+                return $this->errorRes("Cannot find user with given email. Please try again.", 403);
+            }
+
             return response()->json([
                 'status' => true,
                 'user' => $user,
