@@ -31,11 +31,6 @@ class AuthenticationController extends Controller
                 ], 401);
             }
 
-            $checkEmail = User::where('email', $request->email)->first();
-            if (!empty($checkEmail)) {
-                return $this->errorRes('User Email already exists. Please try another email.');
-            }
-
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
