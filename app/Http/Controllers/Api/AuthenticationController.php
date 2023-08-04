@@ -18,11 +18,9 @@ class AuthenticationController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(), 
             [
-                'name' => 'required',
-                'email' => 'required|email|unique:users.email',
+                'email' => 'required|email|unique:users,email',
                 'password' => 'required'
             ]);
-
             if($validateUser->fails()){
                 return response()->json([
                     'status' => false,
@@ -30,12 +28,6 @@ class AuthenticationController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password)
-            ]);
 
             return response()->json([
                 'status' => true,
