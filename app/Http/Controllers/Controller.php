@@ -13,7 +13,7 @@ class Controller extends BaseController
 
     public function errorRes($message, $code = 400)
     {
-        Log::error("An error while updating note. response: " . $note);
+        Log::error("An error while updating note. response: " . $message);
         return json_encode([
             'status' => false,
             'message' => $message,
