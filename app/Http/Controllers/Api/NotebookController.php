@@ -20,6 +20,7 @@ class NotebookController extends Controller
         ]);
 
         $note = Notebook::create([
+            'title' => $request->title,
             'day' => $request->day, 
             'content' => $request->content, 
             'type' => $request->type, 
@@ -46,6 +47,7 @@ class NotebookController extends Controller
                 return $this->errorRes("An error occurred while updating Note Id: " . $request->id);
             }
 
+            $note->title = isset($request->title)? $note->title : $request->title;
             $note->day = isset($request->day)? $note->day : $request->day;
             $note->month = isset($request->month)? $note->month : $request->month;
             $note->type = isset($request->type)? $note->type : $request->type;
@@ -59,5 +61,14 @@ class NotebookController extends Controller
         } catch (Exception $ex) {
             return $this->errorRes("An error occurred while updating Note id: " . $request->id, $ex->getMessage());
         }
+    }
+
+    public function getNotes(Request $request)
+    {
+        $user = auth()->user();
+
+        $notes = Notebook::where('user_id', $user->id)->where('is_deleted', 0)->get();
+
+        return $this->successRes("Successfully updated.", $notes);
     }
 }

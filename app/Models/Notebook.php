@@ -10,6 +10,7 @@ class Notebook extends Model
     use HasFactory;
 
     public $fillable = [
+        'title',
         'day',
         'month',
         'type',
