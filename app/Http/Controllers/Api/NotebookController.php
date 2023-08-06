@@ -66,7 +66,7 @@ class NotebookController extends Controller
         }
     }
 
-    public function getNotes(Request $request)
+    public function getNotes()
     {
         $user = auth()->user();
 
