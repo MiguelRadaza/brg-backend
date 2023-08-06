@@ -14,6 +14,7 @@ class NotebookController extends Controller
         $user = auth()->user();
         $request->validate([
             'day' => 'required',
+            'title' => 'required',
             'content' => 'required',
             'type' => 'required',
             'month' => 'required',
@@ -22,6 +23,7 @@ class NotebookController extends Controller
         $note = Notebook::create([
             'title' => $request->title,
             'day' => $request->day, 
+            'user_id' => $user->id, 
             'content' => $request->content, 
             'type' => $request->type, 
             'month' => $request->month, 
@@ -47,6 +49,7 @@ class NotebookController extends Controller
                 return $this->errorRes("An error occurred while updating Note Id: " . $request->id);
             }
 
+            $note->user_id = $user->id;
             $note->title = isset($request->title)? $note->title : $request->title;
             $note->day = isset($request->day)? $note->day : $request->day;
             $note->month = isset($request->month)? $note->month : $request->month;
