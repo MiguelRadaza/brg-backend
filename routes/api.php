@@ -30,6 +30,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('notebook')->group(function () {
         Route::post('/create', [NotebookController::class, 'create']);
         Route::post('/update', [NotebookController::class, 'update']);
-        Route::post('/', [NotebookController::class, 'getNotes']);
+        Route::get('/', [NotebookController::class, 'getNotes']);
     });
 });
