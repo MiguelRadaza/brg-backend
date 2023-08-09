@@ -79,7 +79,7 @@ class NotebookController extends Controller
     {
         $user = auth()->user();
 
-        $notes = Notebook::where('user_id', $user->id)->where('id', $id)->get();
+        $notes = Notebook::where('user_id', $user->id)->where('id', $id)->first();
 
         return $this->successRes("Successfully updated.", $notes);
     }
