@@ -74,4 +74,13 @@ class NotebookController extends Controller
 
         return $this->successRes("Successfully updated.", $notes);
     }
+
+    public function getNoteById($id)
+    {
+        $user = auth()->user();
+
+        $notes = Notebook::where('user_id', $user->id)->where('id', $id)->get();
+
+        return $this->successRes("Successfully updated.", $notes);
+    }
 }

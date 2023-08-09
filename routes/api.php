@@ -31,5 +31,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/create', [NotebookController::class, 'create']);
         Route::post('/update', [NotebookController::class, 'update']);
         Route::get('/', [NotebookController::class, 'getNotes']);
+        Route::get('/{id}', [NotebookController::class, 'getNoteById']);
     });
 });
